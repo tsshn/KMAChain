@@ -4,6 +4,8 @@
  * and a shotName for convenience.
  */
 
+const assert = require("assert");
+
 class AcademicProgram {
     constructor(name, number) {
         this.name = name;
@@ -62,14 +64,70 @@ class Mark {
     }
 }
 
-// class Assignment {
-//     constructor(name, shortDescription, ) {
-//     }
-// }
-// TODO finish implementing models
+class Assignment {
+    //          string, string,    number,   number,  Date
+    constructor(name, description, maxMark, deadline) {
+        this.name = name;
+        this.description = description;
+        this.maxMark = maxMark;
+        this.setMark = undefined;
+        this.deadline = deadline;
+    }
+    //              mark | number
+    assessAndSetMark(mark) {
+        if(mark.hasOwnProperty(numericMark)) this.setMark = mark.getNumericMark();
+        else this.setMark = mark;
+    }
+}
+
+class Student {
+    constructor(name, surname, patronymic, email, phoneNum, faculty, academicProgram) {
+        assert(faculty instanceof Faculty, 'Provided wrong faculty type');
+        assert(academicProgram instanceof AcademicProgram, 'Provided wrong academic program argument');
+        this.name = name;
+        this.surname = surname;
+        this.patronymic = patronymic;
+        this.email = email;
+        this.phoneNum = phoneNum;
+        this.faculty = faculty;
+    }
+}
+
+class Teacher {
+    constructor(name, surname, patronymic) { // not much info needed for record book
+        this.name = name;
+        this.surname = surname;
+        this.patronymic = patronymic;
+    }
+}
+
+class Subject {
+    constructor(name, semester, ectsCredits, assignments) { // not much info needed for record book
+        this.name = name;
+        this.semester = semester;
+        this.ectsCredits = ectsCredits;
+        this.assignments = assignments;
+    }
+}
+
+class Semester {
+    constructor(numberStr, subjects) {
+        this.ectsCredits = 0;
+        for (const subject of subjects) {
+            this.ectsCredits += subject.ectsCredits;
+        }
+        this.subjects = subjects;
+    }
+}
+
 
 module.exports = {
     Faculty: Faculty,
     AcademicProgram: AcademicProgram,
     Mark: Mark,
+    Assignment: Assignment,
+    Student: Student,
+    Teacher: Teacher,
+    Subject: Subject,
+    Semester: Semester
 };
